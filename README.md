@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -10,3 +11,7 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+=======
+# N-Book
+social media application where users can:  Create posts with text and images.  Comment on posts and interact with others.  Update or delete their posts and comments.  Change their profile photo and have it update everywhere instantly.  Securely change their password.
+>>>>>>> 89cc438369b64527842bbf2a655b89779f40e466
