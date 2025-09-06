@@ -44,7 +44,7 @@ export default function Login() {
             <form onSubmit={handleSubmit(singIn)} className='flex flex-col gap-4'>
                 <Input isInvalid={Boolean(errors.email) && touchedFields.email} errorMessage={errors.email?.message} variant='bordered' label="Email" {...register('email')} type="email" />
                 <Input className='pb-' isInvalid={Boolean(errors.password) && touchedFields.password} errorMessage={errors.password?.message} variant='bordered' label="Password" {...register('password')} type='password'/>
-                <Link to={'/change-password'} className='text-red-700 text-sm pt-0'>Change Password</Link>
+                {/* <Link to={'/change-password'} className='text-red-700 text-sm pt-0'>Change Password</Link> */}
                 <Button isLoading={loading} type='submit' color="primary">Login</Button>
                 <div className="text-center">If you don't have an account <Link to={'/register'} className='text-blue-400'>Register</Link></div>
                 {apiErrors && <span className='text-center text-red-500'>{apiErrors}</span>}

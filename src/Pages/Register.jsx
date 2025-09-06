@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { sendRegisterData } from "../Services/authServices";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { schema } from "../Schema/RegisterSchema";
+import { schemaReg } from "../Schema/registerSchema";
 
 
 
@@ -26,7 +26,7 @@ export default function Register() {
             gender: ''
         },
         // for validation
-        resolver: zodResolver(schema),
+        resolver: zodResolver(schemaReg),
         mode: 'onBlur',
         reValidateMode: 'onBlur'
     });
@@ -54,7 +54,7 @@ export default function Register() {
                 <Input isInvalid={Boolean(errors.name) && touchedFields.name} errorMessage={errors.name?.message} variant="bordered" label='Name' {...register('name')}  type="text" />
 
                 <Input isInvalid={Boolean(errors.email) && touchedFields.email} errorMessage={errors.email?.message} variant="bordered" label='Email' {...register('email')} type="email" />
-  
+
                 <Input isInvalid={Boolean(errors.password) && touchedFields.password} errorMessage={errors.password?.message} variant="bordered" label='Password' {...register('password')}  type="password" />
 
                 <Input isInvalid={Boolean(errors.rePassword) && touchedFields.rePassword} errorMessage={errors.rePassword?.message} variant="bordered" label='Confirm Password' {...register('rePassword')} type="password" />

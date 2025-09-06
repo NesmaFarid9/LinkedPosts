@@ -1,6 +1,6 @@
 import * as zod from 'zod'
 
-export const schema = zod.object({
+export const schemaReg = zod.object({
     name: zod.string().nonempty('Name is required')
             .min(3, 'Name should at least 3 characters')
             .max(10, 'Name should be at most 10 characters'),
