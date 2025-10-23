@@ -11,31 +11,31 @@ export default function PostComments({ comment, postUserId, callback }) {
 
     return (
         <div className="bg-gray-200 p-4 -mx-3 -mb-3">
-        <div className="w-full h-16 items-center flex justify-between">
-            <CardHeader
-            photo={comment.commentCreator?.photo || photoProfile}
-            name={comment.commentCreator?.name}
-            date={comment.createdAt.split(".", 1).join("").replace("T", " ")}
-            userId={comment.commentCreator?._id}
-            />
+            <div className="w-full h-16 items-center flex justify-between">
+                <CardHeader
+                    photo={comment.commentCreator?.photo || photoProfile}
+                    name={comment.commentCreator?.name}
+                    date={comment.createdAt.split(".", 1).join("").replace("T", " ")}
+                    userId={comment.commentCreator?._id}
+                />
 
-            {userData?._id === comment?.commentCreator?._id && userData?._id === postUserId && (
-            <DropDownAction callback={callback} commentId={comment._id} setIsUpdate={setIsUpdateComment} />
-            )}
-        </div>
-
-        {isUpdateComment ? (
-            <div className="bg-white p-4 -mx-3 -mb-3">
-            <CommentUpdate
-                commentId={comment._id}
-                content={comment.content}
-                setIsUpdateComment={setIsUpdateComment}
-                callback={callback}
-            />
+                {userData?._id === comment?.commentCreator?._id && userData?._id === postUserId && (
+                    <DropDownAction callback={callback} commentId={comment._id} setIsUpdate={setIsUpdateComment} />
+                )}
             </div>
-        ) : (
-            <p className="p-2 ps-4">{comment.content}</p>
-        )}
+
+            {isUpdateComment ? (
+                <div className="bg-white p-4 -mx-3 -mb-3">
+                    <CommentUpdate
+                        commentId={comment._id}
+                        content={comment.content}
+                        setIsUpdateComment={setIsUpdateComment}
+                        callback={callback}
+                    />
+                </div>
+            ) : (
+                <p className="p-2 ps-4">{comment.content}</p>
+            )}
         </div>
     );
 }

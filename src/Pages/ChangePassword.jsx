@@ -39,7 +39,7 @@ export default function ChangePassword() {
     }
 
     return (
-        <div className="min-h-screen flex justify-center items-center">
+        <div className="min-h-[88vh] flex justify-center items-center">
             <div className='w-4/12 mx-auto'>
                 <div className='bg-white py-10 px-6 rounded-2xl shadow-2xl min-w-md'>
                 <h1 className='text-center text-2xl pb-4'>Change Password</h1>

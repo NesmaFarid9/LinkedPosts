@@ -1,5 +1,8 @@
-import { useContext, useState } from "react";
+// import { useContext } from "react";
 import photoProfile from "../../assets/profilePhoto.jpg";
+// import { AuthContext } from "../../Context/AuthContext";
+
+import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 
 export default function CardHeader({ photo, name, date, userId }) {

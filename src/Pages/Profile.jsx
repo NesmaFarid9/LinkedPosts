@@ -14,18 +14,18 @@ export default function Profile() {
 
     async function getUserPosts(userId) {
         try {
-        const response = await getUserPostsApi(userId);
-        if (response?.message) {
-            setPosts(response.posts);
-        }
+            const response = await getUserPostsApi(userId);
+            if (response?.message) {
+                setPosts(response.posts);
+            }
         } catch (err) {
-        console.log(err);
+            console.log(err);
         }
     }
 
     useEffect(() => {
         if (userData?._id) {
-        getUserPosts(userData._id);
+            getUserPosts(userData._id);
         }
     }, [userData?._id]);
 
@@ -37,42 +37,80 @@ export default function Profile() {
         try {
             const response = await changeProfilePhotoApi(formdata);
             if (response?.message) {
-                const updatedUser = await getLoggedUserData();
-                // update posts so all comments also reflect the new photo
+                await getLoggedUserData();
                 if (userData?._id) {
                     getUserPosts(userData._id);
                 }
                 setPreviewImage(null);
-        }
+            }
         } catch (err) {
-        console.log(err);
+            console.log(err);
         }
 
         e.target.value = "";
     }
 
     return (
-        <div className="w-full max-w-lg flex flex-col justify-center items-center mx-auto">
-        <div className="flex justify-between items-center bg-amber-200 w-full px-4 py-2">
-            <input type="file" id="profileImage" className="hidden" onChange={changeProfilePhoto} />
-            <label htmlFor="profileImage" className="cursor-pointer">
-            <img
-                onError={(e) => (e.target.src = photoProfile)}
-                src={previewImage || userData?.photo || photoProfile}
-                className="object-cover rounded-full w-16 h-16 mr-3"
-                alt={userData?.name}
-            />
-            </label>
-            <Button color="primary">
-            <Link to={"/change-password"}>Change Password</Link>
-            </Button>
-        </div>
+        <div className="w-full max-w-2xl mx-auto flex flex-col items-center p-6 min-h-screen">
+            {/* Profile Header */}
+            <div className="w-full bg-white rounded-2xl shadow-md p-6 mb-8 flex flex-col sm:flex-row items-center sm:items-start gap-6">
+                {/* Profile Photo */}
+                <div className="relative">
+                    <input
+                        type="file"
+                        id="profileImage"
+                        className="hidden"
+                        onChange={changeProfilePhoto}
+                    />
+                    <label
+                        htmlFor="profileImage"
+                        className="cursor-pointer group relative"
+                    >
+                        <img
+                            onError={(e) => (e.target.src = photoProfile)}
+                            src={previewImage || userData?.photo || photoProfile}
+                            alt={userData?.name}
+                            className="w-28 h-28 rounded-full object-cover border-4 border-blue-100 shadow-md group-hover:opacity-80 transition"
+                        />
+                        <span className="absolute bottom-1 right-1 bg-blue-600 text-white text-xs px-2 py-1 rounded-full shadow hidden group-hover:block">
+                            Change
+                        </span>
+                    </label>
+                </div>
 
-        {posts.length > 0 ? (
-            posts.map((post) => <PostCard key={post._id} post={post} />)
-        ) : (
-            <p className="flex justify-center items-center text-3xl font-bold min-h-screen">No posts available!</p>
-        )}
+                {/* User Info */}
+                <div className="flex flex-col flex-1 text-center sm:text-left">
+                    <h2 className="text-2xl font-bold text-gray-800">
+                        {userData?.name || "User"}
+                    </h2>
+                    <p className="text-gray-500">{userData?.email}</p>
+                    <Button
+                        as={Link}
+                        to="/change-password"
+                        color="primary"
+                        size="sm"
+                        className="mt-4 rounded-full px-6 self-center sm:self-start"
+                    >
+                        Change Password
+                    </Button>
+                </div>
+            </div>
+
+            {/* User Posts */}
+            <div className="w-full">
+                {posts.length > 0 ? (
+                    posts.map((post) => <PostCard key={post._id} post={post} />)
+                ) : (
+                    <div className="flex flex-col items-center justify-center text-center py-20 bg-white rounded-2xl shadow-md">
+                        <p className="text-2xl font-semibold text-gray-600">
+                            No posts available!
+                        </p>
+                        <p className="text-gray-400 mt-2">
+                            Start creating posts and share your thoughts
+                        </p>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }
